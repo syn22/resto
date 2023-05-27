@@ -2,32 +2,32 @@
     {
       "type": "Resto",
       "name": "Resto 123",
-      "lat": 59.955413,
-      "lng": 30.3
+      "lat": 101.000,
+      "lng": 50.000
     },
     {
       "type": "Resto",
       "name": "Resto 456",
-      "lat": 59.955413,
-      "lng": 30.4
+      "lat": 101.1,
+      "lng": 50.1
     },
     {
       "type": "Lair",
       "name": "Lair 321",
-      "lat": 59.9,
-      "lng": 30.3378442
+      "lat": 100.9000,
+      "lng": 50
     },
     {
       "type": "Lair",
       "name": "Lair 654",
-      "lat": 60,
-      "lng": 30.3378443
+      "lat": 101.000,
+      "lng": 49.9000
     },
     {
       "type": "Lair",
       "name": "Lair 987",
-      "lat": 59.955413,
-      "lng": 30.3378444
+      "lat": 100.9000,
+      "lng": 49.9000
     }
   ]
   

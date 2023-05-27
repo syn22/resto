@@ -9,10 +9,8 @@ import locationsData from './locations.json'; // Import from JSON file
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
-AnyReactComponent.defaultProps = {
-  lat: 0,
-  lng: 0,
-  text: 'default',
+AnyReactComponent.propTypes = {
+  text: PropTypes.string,
 };
 
 const OutletsList = () => { 
@@ -79,43 +77,8 @@ const OutletsList = () => {
                     );
                 })}
             </div>
-
-            {/* Google Map */}
-            <div style={{ height: '500px', width: '100%' }}>
-                <GoogleMapReact
-                    bootstrapURLKeys={{ key: 'YOUR_GOOGLE_MAPS_API_KEY' }}
-                    defaultCenter={center}
-                    defaultZoom={8}
-                >
-                    {locationsData.map((location, index) => {
-                        if (!location || !location.lat || !location.lng) {
-                            console.error("Invalid location data: ", location);
-                            return null;
-                        }
-                        return (
-                            <AnyReactComponent
-                                key={index}
-                                lat={location.lat}
-                                lng={location.lng}
-                                text={location.name}
-                            />
-                        );
-                    })}
-                </GoogleMapReact>
-            </div>
         </div>
     );
-};
-
-OutletsList.propTypes = {
-    locationsData: PropTypes.arrayOf(
-        PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            lat: PropTypes.number.isRequired,
-            lng: PropTypes.number.isRequired,
-            type: PropTypes.string.isRequired,
-        })
-    ).isRequired,
 };
 
 export default OutletsList;

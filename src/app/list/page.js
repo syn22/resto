@@ -1,33 +1,12 @@
-'use client'
 import React from 'react';
-import OutletsList from './list';
+import OutletsList from './OutletsList';  // assuming OutletsList.js is in the same directory
+import SimpleMap from './SimpleMap'; // assuming SimpleMap.js is in the same directory
 
-function Restaurant() {
-  const locations = [
-    // Replace with your list of outlets or locations
-    {
-      id: 1,
-      name: 'Outlet 1',
-      latitude: 100.1,
-      longitude: 50.1,
-      address: 'Outlet 1 Address',
-      countryId: 123,
-    },
-    {
-      id: 2,
-      name: 'Outlet 2',
-      latitude: 100.0,
-      longitude: 50.0,
-      address: 'Outlet 2 Address',
-      countryId: 456,
-    },
-  ];
-
-  return (
+const MyPage = () => (
     <div>
-      <OutletsList locations={locations} />
+        <OutletsList />
+        <SimpleMap />
     </div>
-  );
-}
+);
 
-export default Restaurant;
+export default MyPage;
