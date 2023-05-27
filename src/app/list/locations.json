@@ -1,0 +1,33 @@
+[
+    {
+      "type": "Resto",
+      "name": "Resto 123",
+      "lat": 59.955413,
+      "lng": 30.3
+    },
+    {
+      "type": "Resto",
+      "name": "Resto 456",
+      "lat": 59.955413,
+      "lng": 30.4
+    },
+    {
+      "type": "Lair",
+      "name": "Lair 321",
+      "lat": 59.9,
+      "lng": 30.3378442
+    },
+    {
+      "type": "Lair",
+      "name": "Lair 654",
+      "lat": 60,
+      "lng": 30.3378443
+    },
+    {
+      "type": "Lair",
+      "name": "Lair 987",
+      "lat": 59.955413,
+      "lng": 30.3378444
+    }
+  ]
+  
