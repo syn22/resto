@@ -42,11 +42,10 @@ export default function SimpleMap() {
     useEffect(() => {
       getUserLocation(setUserLocation, setMapCenter);
   }, []);
-  
-  const calculateDistances = _.debounce(() => {
-    if(userLocation){
+  const calculateDistances = () => {
+    if(userLocation && locations.length > 0){
         let updatedLocations = [...locations]; // create a copy of the locations array
-
+        console.log(updatedLocations)
         updatedLocations.forEach(place => {
             place.distance = getDistanceFromLatLonInKm(userLocation.lat, userLocation.lng, place.latitude, place.longitude);
         });
@@ -55,21 +54,20 @@ export default function SimpleMap() {
 
         setLocations(updatedLocations); // update state with new distances
     }
-}, 300000); // 300000 milliseconds = 5 minutes
+  };
   
 useEffect(() => {
   fetch('http://localhost:5001/api/places')
       .then(response => response.json())
       .then(data => {
           setLocations(data);
-          calculateDistances();
       })
       .catch(err => console.error(err));
 }, []);
   
   useEffect(() => {
       calculateDistances();
-  }, [userLocation]);
+  }, [userLocation, locations]);
 
     const centerToUserLocation = useCallback(() => {
         if (userLocation) {
