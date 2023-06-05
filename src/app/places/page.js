@@ -16,7 +16,7 @@ const AddPlacePage = () => {
   const userId = 11; // replace this with your actual user id
 
   useEffect(() => {
-    fetch(`http://localhost:5001/api/plans?user_id=${userId}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/plans?user_id=${userId}`)
       .then((response) => response.json())
       .then((data) => setPlans(data));
   }, []);
@@ -43,7 +43,7 @@ const AddPlacePage = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(placeData),
     };
-    fetch('http://localhost:5001/api/places', requestOptionsPostgres)
+    fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/places`, requestOptionsPostgres)
         .then(response => {
           if (!response.ok) {
             throw new Error('Place name already exists in the database');
@@ -62,7 +62,7 @@ const AddPlacePage = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ place }),
     };
-    fetch('http://localhost:5001/api/places/mongodb-data', requestOptionsMongoDB)
+    fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/places/mongodb-data`, requestOptionsMongoDB)
         .then(response => {
           if (!response.ok) {
             throw new Error('Place name already exists in the MongoDB');
@@ -83,7 +83,7 @@ const AddPlacePage = () => {
       }),
     };
   
-    fetch('http://localhost:5001/api/places/plan', requestOptions)
+    fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/places/plan`, requestOptions)
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(err => console.error(err));
