@@ -18,7 +18,7 @@ import thetanIcon from "../../../public/icons/thetan.jpg";
 export default function SimpleMap() {
     const [selectedMarker, setSelectedMarker] = useState(-1);
     const [userLocation, setUserLocation] = useState(null);
-    const [mapCenter, setMapCenter] = useState({ lat: 59.955413, lng: 30.337844 }); // Initial coordinates
+    const [mapCenter, setMapCenter] = useState({ lat: -6.305968, lng:	106.672272 }); // Initial coordinates
     const [mapKey, setMapKey] = useState(0); // Key to force re-render
     const [locations, setLocations] = useState([]);
     const [mapZoom, setMapZoom] = useState(13); // Initial zoom level
