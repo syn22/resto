@@ -39,31 +39,30 @@ const SearchBox = forwardRef(({ map, maps, setMapViewport, onPlaceSelect }, ref)
   }, [map, maps, setMapViewport, onPlaceSelect]);
 
   return (
-    <div>
+    <div style={{ position: 'absolute' }}>
       <input
         ref={searchBoxRef}
         type="text"
         placeholder="Search places..."
         style={{
-          boxSizing: `border-box`,
-          border: `1px solid transparent`,
-          width: `320px`,
-          height: `40px`,
-          marginTop: `27px`,
-          padding: `0 12px`,
-          borderRadius: `3px`,
-          boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-          fontSize: `16px`,
-          outline: `none`,
-          textOverflow: `ellipses`,
+          boxSizing: 'border-box',
+          border: '1px solid transparent',
+          width: '320px',
+          height: '40px',
+          marginTop: '27px',
+          padding: '0 12px',
+          borderRadius: '3px',
+          boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
+          fontSize: '16px',
+          outline: 'none',
+          textOverflow: 'ellipsis',
           position: 'absolute',
-          left: '0',    // Changed from '55%'
-          top: '0',     // Added top position
-          marginLeft: '20px',
+          left: '20px',   // Adjusted left position to 20px
+          top: '20px',    // Adjusted top position to 20px
         }}
       />
     </div>
-  );
+  );  
 });
 
 export default SearchBox;
