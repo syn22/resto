@@ -1,16 +1,16 @@
-import React, { forwardRef, useImperativeHandle, useRef, useEffect } from 'react';
+import React, { forwardRef, useRef, useEffect } from 'react';
 
 const SearchBox = forwardRef(({ map, maps, setMapViewport }, ref) => {
   const searchBoxRef = useRef();
-  let searchBox = null;
+  const searchBox = useRef(null);
 
   useEffect(() => {
     if (map && maps) {
-      searchBox = new maps.places.SearchBox(searchBoxRef.current);
+      searchBox.current = new maps.places.SearchBox(searchBoxRef.current);
       map.controls[maps.ControlPosition.TOP_LEFT].push(searchBoxRef.current);
 
-      searchBox.addListener('places_changed', () => {
-        const places = searchBox.getPlaces();
+      searchBox.current.addListener('places_changed', () => {
+        const places = searchBox.current.getPlaces();
       
         if (places.length === 0) {
           return;
@@ -31,8 +31,8 @@ const SearchBox = forwardRef(({ map, maps, setMapViewport }, ref) => {
       });
 
       return () => {
-        if (searchBox && maps) {
-          maps.event.clearInstanceListeners(searchBox);
+        if (searchBox.current && maps) {
+          maps.event.clearInstanceListeners(searchBox.current);
         }
       };
     }
@@ -62,5 +62,7 @@ const SearchBox = forwardRef(({ map, maps, setMapViewport }, ref) => {
     />
   );
 });
+
+SearchBox.displayName = 'SearchBox';  // add this line
 
 export default SearchBox;

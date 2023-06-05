@@ -65,4 +65,6 @@ const SearchBox = forwardRef(({ map, maps, setMapViewport, onPlaceSelect }, ref)
   );  
 });
 
+SearchBox.displayName = 'SearchBox';  // add this line
+
 export default SearchBox;
