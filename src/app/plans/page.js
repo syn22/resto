@@ -49,7 +49,7 @@ const PlanPage = () => {
   }
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_HOST}:5001/api/plans?user_id=11`) 
+    fetch('http://localhost:5001/api/plans?user_id=11') 
       .then((response) => response.json())
       .then((data) => setPlans(data));
   }, []);
@@ -89,7 +89,7 @@ const PlanPage = () => {
   };
 
   const removePlace = (planId, placeId) => {
-    fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/plans/${planId}/places/${placeId}`, {
+    fetch(`http://localhost:5001/api/plans/${planId}/places/${placeId}`, {
       method: 'DELETE',
     })
     .then(response => response.json())
