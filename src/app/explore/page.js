@@ -57,7 +57,7 @@ export default function SimpleMap() {
   };
   
 useEffect(() => {
-  fetch('http://localhost:5001/api/places')
+  fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/places`)
       .then(response => response.json())
       .then(data => {
           setLocations(data);
