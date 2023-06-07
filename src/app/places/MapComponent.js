@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const MapComponent = ({ selectedPlace, handleAddPlace, plans, selectedPlan, onSelectPlan }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const handleNextImage = () => {
+    // If the selected place has more images, go to the next one. 
+    // Otherwise, go back to the first one.
+    if (selectedPlace.photos && currentImageIndex < selectedPlace.photos.length - 1) {
+      setCurrentImageIndex(currentImageIndex + 1);
+    } else {
+      setCurrentImageIndex(0);
+    }
+  };
 
   const handlePlanChange = (event) => {
     onSelectPlan(event.target.value);
@@ -23,12 +34,16 @@ const MapComponent = ({ selectedPlace, handleAddPlace, plans, selectedPlan, onSe
         <h2>{selectedPlace.name}</h2>
         <p>{selectedPlace.formatted_address}</p>
         {selectedPlace.photos && 
-        <img 
-          src={selectedPlace.photos[0].getUrl()} 
-          alt={selectedPlace.name} 
-          width={300}  // You should provide width and height attributes
-          height={200} 
-        />}
+          <div>
+            <img 
+              src={selectedPlace.photos[currentImageIndex].getUrl()} 
+              alt={selectedPlace.name} 
+              width={300}  
+              height={200} 
+            />
+            <button onClick={handleNextImage}>Next Image</button>
+          </div>
+        }
         <br />
         <select value={selectedPlan} onChange={handlePlanChange}>
           {plans.map(plan => (
