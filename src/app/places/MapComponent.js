@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image'; // Import Image from next/image
 
 const MapComponent = ({ selectedPlace, handleAddPlace, plans, selectedPlan, onSelectPlan }) => {
 
@@ -24,12 +23,11 @@ const MapComponent = ({ selectedPlace, handleAddPlace, plans, selectedPlan, onSe
         <h2>{selectedPlace.name}</h2>
         <p>{selectedPlace.formatted_address}</p>
         {selectedPlace.photos && 
-        <Image 
+        <img 
           src={selectedPlace.photos[0].getUrl()} 
           alt={selectedPlace.name} 
           width={300}  // You should provide width and height attributes
           height={200} 
-          layout="intrinsic" // optional, this is for responsive images 
         />}
         <br />
         <select value={selectedPlan} onChange={handlePlanChange}>
