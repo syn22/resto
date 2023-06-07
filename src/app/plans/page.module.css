@@ -1,29 +1,42 @@
-/* page.module.css */
-.page-container {
-  all: initial;
+.container {
+  height: 100vh;
+  overflow: hidden;
+  padding: 20px;
+  display: flex;
+}
+
+.plan-section {
+  flex: 1;
+  max-width: 350px;
+  overflow: auto;
+  padding-right: 20px;
+  margin-right: 20px;
+  border-right: 1px solid #ddd;
 }
 
 .plans-list {
   display: flex;
-  flex-direction: column;
-  padding: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.plans-list div {
-  margin-bottom: 10px;
+.plan-item {
+  width: calc(50% - 20px);
   padding: 10px;
-  background-color: #f5f5f5;
-  border-radius: 5px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
   cursor: pointer;
 }
 
-.plans-list div:hover {
-  background-color: #e0e0e0;
-}
-
-.map-container {
-  height: 100vh;
-  width: 100%;
+.add-plan-button {
+  display: inline-block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .modal {
@@ -31,72 +44,51 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 300px;
   padding: 20px;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  animation: modalOpen 0.5s;
-  display: flex;
-  flex-direction: column;
+  width: 400px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  animation: fade-in 0.3s ease-out forwards;
 }
 
-.modal-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-.add-plan-button {
-  background: #007BFF;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 16px;
-  margin: 20px 0 20px auto;
-  display: block;
-  cursor: pointer;
+.modal-close {
+  animation: fade-out 0.3s ease-out forwards;
 }
 
 .plan-name-input {
   width: 100%;
   padding: 10px;
-  font-size: 18px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
-.add-plan-button:hover {
-  background: #0056b3;
+.modalButtons {
+  display: flex;
+  justify-content: space-between;
 }
 
-.modal-close {
-  animation: modalClose 0.5s;
+.confirmButton, .cancelButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-@keyframes modalOpen {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -60%);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
+.confirmButton {
+  background-color: #0070f3;
+  color: white;
 }
 
-@keyframes modalClose {
-  from {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
+.cancelButton {
+  background-color: #e0e0e0;
+  color: #333;
+}
 
-  to {
-    opacity: 0;
-    transform: translate(-50%, -60%);
-  }
+.map-container {
+  flex: 3;
+  height: 100%;
+}
+
+.plan-item {
+  padding: 10px;
+  margin-bottom: 10px;
 }

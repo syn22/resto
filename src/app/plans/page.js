@@ -3,23 +3,20 @@ import React, { useState, useEffect } from "react";
 import GoogleMapReact from "google-map-react";
 import Marker from "./Marker";
 import LocationDot from "./LocationDot";
-import styles from './page.module.css'; // Import styles
-import { getUserLocation } from './mapUtils';  // Import the getUserLocation function
-
-// Import the createPlan function
-import { createPlan } from './api';  // Update this import as per your file structure
+import styles from './page.module.css';
+import { getUserLocation } from './mapUtils';
+import { createPlan } from './api';
 
 const PlanPage = () => {
   const [plans, setPlans] = useState([]);
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [viewport, setViewport] = useState({lat: 59.955413, lng: 30.337844, zoom: 10});
-  const [userLocation, setUserLocation] = useState(null); // State for user location
-  const [newPlanName, setNewPlanName] = useState(''); // State for new plan name
-  const [isPublic, setIsPublic] = useState(false); // New state for public checkbox
-  const [isAddPlanModalOpen, setIsAddPlanModalOpen] = useState(false); // State for managing add plan modal
+  const [userLocation, setUserLocation] = useState(null);
+  const [newPlanName, setNewPlanName] = useState('');
+  const [isPublic, setIsPublic] = useState(false);
+  const [isAddPlanModalOpen, setIsAddPlanModalOpen] = useState(false);
 
   useEffect(() => {
-    // Get user location when the component mounts
     getUserLocation(setUserLocation);
   }, []);
 
@@ -105,33 +102,33 @@ const PlanPage = () => {
   };
 
   return (
-    <div>
-      <h1>Your Plans</h1>
+    <div className={styles.container} style={{ background: 'none', margin: 0, width: '100%', display: 'flex' }}>
+
+    <div className={styles["plan-section"]}>
+      <h1>You have {plans.length} plan{plans.length !== 1 && 's'}</h1>
 
       <div className={styles["plans-list"]}>
         {plans.map((plan, index) => (
-          <div key={index} onClick={() => handlePlanClick(plan)}>
-            <h2>{plan.plan_name}</h2>
-            {Array.isArray(plan.places) && (
-              <p>
-                {plan.places
-                  .filter(place => place && place.place_name)
-                  .map(place => place.place_name)
-                  .join(', ')}
-              </p>
-            )}
+          <div key={index} onClick={() => { 
+            if (selectedPlan?.plan_id === plan.plan_id) {
+              setSelectedPlan(null); 
+            } else { 
+              handlePlanClick(plan);
+            }
+          }} className={styles["plan-item"]}>
+            <p>{plan.plan_name} ({plan.places.length} place{plan.places.length !== 1 && 's'})</p>
           </div>
         ))}
-      </div>
+        </div>
 
-      <button 
-        className={styles["add-plan-button"]} 
-        onClick={() => setIsAddPlanModalOpen(true)}
-      >
-        Add New Plan
-      </button>
+        <button 
+          className={styles["add-plan-button"]} 
+          onClick={() => setIsAddPlanModalOpen(true)}
+        >
+          Add New Plan
+        </button>
 
-      {isAddPlanModalOpen && (
+        {isAddPlanModalOpen && (
         <div 
           className={styles["modal"] + ' ' + (isAddPlanModalOpen ? '' : styles['modal-close'])}
           onAnimationEnd={() => {if (!isAddPlanModalOpen) setNewPlanName('')}}
@@ -158,6 +155,7 @@ const PlanPage = () => {
             </div>
         </div>
         )}
+      </div>
 
     {selectedPlan && (
         <div className={styles["map-container"]}>
