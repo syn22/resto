@@ -49,7 +49,7 @@ const PlanPage = () => {
   }
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/plans?user_id=11`) 
+    fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/plans?user_id=1`) 
       .then((response) => response.json())
       .then((data) => setPlans(data));
   }, []);
@@ -77,7 +77,7 @@ const PlanPage = () => {
 
   const handleAddPlan = () => {
     createPlan({
-      user_id: 11, // Set this according to your requirements
+      user_id: 1, // Set this according to your requirements
       name: newPlanName,
       is_public: isPublic, // New field for public status
     }).then((newPlan) => {
