@@ -15,6 +15,11 @@ const PlanPage = () => {
   const [newPlanName, setNewPlanName] = useState('');
   const [isPublic, setIsPublic] = useState(false);
   const [isAddPlanModalOpen, setIsAddPlanModalOpen] = useState(false);
+  const [selectedPlaceId, setSelectedPlaceId] = useState(null);
+
+  const handleSelect = (placeId) => {
+    setSelectedPlaceId(placeId);
+  };
 
   useEffect(() => {
     getUserLocation(setUserLocation);
@@ -169,14 +174,16 @@ const PlanPage = () => {
             yesIWantToUseGoogleMapApiInternals
             >
             {selectedPlan.places.map((place, index) => (
-                <Marker
+              <Marker
                 key={index}
                 lat={place.latitude}
                 lng={place.longitude}
                 text={place.place_name}
                 placeId={place.place_id}
                 removePlace={() => removePlace(selectedPlan.plan_id, place.place_id)}
-                />
+                selectedPlaceId={selectedPlaceId}
+                onSelect={handleSelect}
+              />
             ))}
             {userLocation && <LocationDot lat={userLocation.lat} lng={userLocation.lng}/>}
             </GoogleMapReact>
