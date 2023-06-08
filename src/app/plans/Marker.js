@@ -5,7 +5,8 @@ import { faMapPin, faUtensils, faGraduationCap, faLandmark, faPlane, faBasketSho
 
 const Marker = ({ text, placeId, removePlace, lat, lng, selectedPlaceId, onSelect, type }) => {
   const handleDirection = () => {
-    window.open(`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`, "_blank");
+    const place = encodeURIComponent(text);
+    window.open(`https://www.google.com/maps/dir/?api=1&destination=${place}`, "_blank");
   };
 
   const handleRemove = () => {
@@ -51,16 +52,14 @@ const Marker = ({ text, placeId, removePlace, lat, lng, selectedPlaceId, onSelec
         className={`${styles.marker} ${selectedPlaceId === placeId ? styles.selected : ""}`}
     >
       <div className={styles.transformed}>
-        <FontAwesomeIcon icon={icon} bounce className={styles.pin} size="3x" style={{color: color}} />
+        <FontAwesomeIcon icon={icon} bounce className={styles.pin} size="2x" style={{color: color}} />
         <div className={styles.pulse}></div>
       </div>
-      {selectedPlaceId === placeId && (
-        <div className={styles.info}>
-          <h2>{text}</h2>
-          <button onClick={handleDirection}>Get Directions</button>
-          <button onClick={handleRemove}>Remove Place</button>
-        </div>
-      )}
+      <div className={styles.info}>
+        <h2>{text}</h2>
+        <button onClick={handleDirection}>Get Directions</button>
+        <button onClick={handleRemove} disabled>Remove Place</button>
+      </div>
     </div>
   );
 };

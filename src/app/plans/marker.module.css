@@ -38,7 +38,7 @@
     margin: 5px 0;
     padding: 5px 10px;
     border: none;
-    background-color: #f44336;
+    background-color: #e99f16;
     color: white;
     border-radius: 5px;
     cursor: pointer;
@@ -48,6 +48,12 @@
 .info button:hover {
     background-color: #d63336;
 }
+
+.info button:disabled {
+    background-color: #ccc;
+    color: #888;
+    cursor: not-allowed;
+  }
 
 .pin:after {
     content: '';
