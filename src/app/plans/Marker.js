@@ -9,6 +9,11 @@ const Marker = ({ text, placeId, removePlace, lat, lng, selectedPlaceId, onSelec
     window.open(`https://www.google.com/maps/dir/?api=1&destination=${place}`, "_blank");
   };
 
+  const handleKakaoDirection = () => {
+    const place = encodeURIComponent(text);
+    window.open(`https://map.kakao.com/link/to/${place}, ${lat}, ${lng}`, "_blank");
+  };
+
   const handleRemove = () => {
     removePlace(placeId);
   };
@@ -57,7 +62,8 @@ const Marker = ({ text, placeId, removePlace, lat, lng, selectedPlaceId, onSelec
       </div>
       <div className={styles.info}>
         <h2>{text}</h2>
-        <button onClick={handleDirection}>Get Directions</button>
+        <button onClick={handleDirection}>Get Directions (Google)</button>
+        <button onClick={handleKakaoDirection}>Get Directions (Kakao)</button>
         <button onClick={handleRemove} disabled>Remove Place</button>
       </div>
     </div>
