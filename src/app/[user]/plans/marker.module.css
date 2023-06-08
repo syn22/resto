@@ -1,0 +1,77 @@
+.marker {
+    position: absolute;
+    bottom: 50%;  /* Align marker to the bottom center */
+    left: 50%;
+    transform: translate(-50%, 50%);
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 201;
+}
+
+.marker .info {
+    display: none;
+    background-color: #fff;
+    border: 2px solid #000;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 30px;  /* Add space above info box */
+    position: absolute;
+    bottom: 100%;  /* Position info box above marker */
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.marker.selected .info {
+    display: flex;
+}
+
+.info h2 {
+    margin-bottom: 10px;
+}
+
+.info button {
+    margin: 5px 0;
+    padding: 5px 10px;
+    border: none;
+    background-color: #e99f16;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.info button:hover {
+    background-color: #d63336;
+}
+
+.info button:disabled {
+    background-color: #ccc;
+    color: #888;
+    cursor: not-allowed;
+  }
+
+.pin:after {
+    content: '';
+    width: 14px;
+    height: 14px;
+    margin: 8% auto;
+    background-color: #fff;
+    position: absolute;
+    border-radius: 50%;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
