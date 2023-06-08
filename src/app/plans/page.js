@@ -180,6 +180,7 @@ const PlanPage = () => {
                 lng={place.longitude}
                 text={place.place_name}
                 placeId={place.place_id}
+                type={place.place_type}
                 removePlace={() => removePlace(selectedPlan.plan_id, place.place_id)}
                 selectedPlaceId={selectedPlaceId}
                 onSelect={handleSelect}

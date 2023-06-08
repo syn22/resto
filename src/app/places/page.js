@@ -13,10 +13,8 @@ const AddPlacePage = () => {
   const [plans, setPlans] = useState([]); // Add a new state for plans
   const [selectedPlan, setSelectedPlan] = useState(null); // Add a new state for selected plan
 
-  const userId = 1; // replace this with your actual user id
-
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/plans?user_id=${userId}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/plans?user_id=${process.env.NEXT_PUBLIC_TEST_USER_ID}`)
       .then((response) => response.json())
       .then((data) => setPlans(data));
   }, []);
