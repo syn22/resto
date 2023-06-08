@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Travel Plan',
-  description: 'Made with ChatGPT love',
+  description: 'Made with <3 by ChatGPT',
 }
 
 export default function RootLayout({ children }) {
