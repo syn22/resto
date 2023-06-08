@@ -1,8 +1,9 @@
 .container {
   height: 100vh;
-  overflow: hidden;
   padding: 20px;
   display: flex;
+  flex-direction: column;
+  overflow: auto;
 }
 
 .plan-section {
@@ -10,22 +11,40 @@
   max-width: 350px;
   overflow: auto;
   padding-right: 20px;
-  margin-right: 20px;
-  border-right: 1px solid #ddd;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  min-height: 25vh;
+}
+
+.map-container {
+  flex: 3;
+  height: 100%;
+  min-height: 75vh;
 }
 
 .plans-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-top: 20px;
 }
 
 .plan-item {
   width: calc(50% - 20px);
   padding: 10px;
   margin-bottom: 20px;
-  background-color: #f0f0f0;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  transition: background-color 0.5s, transform 0.5s;
   cursor: pointer;
+  text-align: center;
+}
+
+.plan-item:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
 }
 
 .add-plan-button {
@@ -83,12 +102,40 @@
   color: #333;
 }
 
-.map-container {
-  flex: 3;
-  height: 100%;
+@media screen and (min-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+
+  .plan-section {
+    max-width: none;
+    margin-right: 20px;
+    margin-bottom: 0;
+    border-right: 1px solid #ddd;
+    border-bottom: none;
+  }
 }
 
-.plan-item {
-  padding: 10px;
-  margin-bottom: 10px;
+/* For light mode */
+@media (prefers-color-scheme: light) {
+  .plan-item {
+    background-color: #0070f3;
+    color: white;
+  }
+
+  .plan-item:hover {
+    background-color: #0056b3;
+  }
+}
+
+/* For dark mode */
+@media (prefers-color-scheme: dark) {
+  .plan-item {
+    background-color: #4caf50;
+    color: white;
+  }
+
+  .plan-item:hover {
+    background-color: #087f23;
+  }
 }
