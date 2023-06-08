@@ -45,7 +45,8 @@ const MapComponent = ({ selectedPlace, handleAddPlace, plans, selectedPlan, onSe
           </div>
         }
         <br />
-        <select value={selectedPlan} onChange={handlePlanChange}>
+        <select value={selectedPlan || ''} onChange={handlePlanChange}>
+          <option value="" disabled>Select a plan</option>
           {plans.map(plan => (
             <option value={plan.plan_id} key={plan.plan_id}>{plan.plan_name}</option>
           ))}

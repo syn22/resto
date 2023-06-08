@@ -108,22 +108,29 @@ const PlanPage = () => {
 
   return (
     <div className={styles.container} style={{ background: 'none', margin: 0, width: '100%', display: 'flex' }}>
-
-    <div className={styles["plan-section"]}>
-      <h1>You have {plans.length} plan{plans.length !== 1 && 's'}</h1>
-
-      <div className={styles["plans-list"]}>
-        {plans.map((plan, index) => (
-          <div key={index} onClick={() => { 
-            if (selectedPlan?.plan_id === plan.plan_id) {
-              setSelectedPlan(null); 
-            } else { 
-              handlePlanClick(plan);
-            }
-          }} className={styles["plan-item"]}>
-            <p>{plan.plan_name} ({plan.places.length} place{plan.places.length !== 1 && 's'})</p>
-          </div>
-        ))}
+  
+      <div className={styles["plan-section"]}>
+        <h1>You have {plans.length} plan{plans.length > 1 ? 's' : ''}</h1>
+  
+        <div className={styles["plans-list"]}>
+          {plans.map((plan, index) => (
+            <div key={index} onClick={() => { 
+              if (selectedPlan?.plan_id === plan.plan_id) {
+                setSelectedPlan(null); 
+              } else { 
+                handlePlanClick(plan);
+              }
+            }} className={styles["plan-item"]}>
+              <p>
+                {plan.plan_name} (
+                {plan.places && plan.places.length > 0 ? 
+                  `${plan.places.length} place${plan.places.length > 1 ? 's' : ''}` 
+                  : 
+                  "No places"}
+                )
+              </p>
+            </div>
+          ))}
         </div>
 
         <button 

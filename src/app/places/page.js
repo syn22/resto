@@ -29,10 +29,19 @@ const AddPlacePage = () => {
 
     // If not, proceed to add the place
     const placeData = { 
-      name: place.name, 
-      type: place.types[0],  // Use 'Restaurant' for the type
-      longitude: place.geometry.location.lng(),
-      latitude: place.geometry.location.lat()
+      place: {
+        name: place.name, 
+        type: place.types[0],
+        types: place.types, // Use all types
+        geometry: {
+          location: {
+            lng: place.geometry.location.lng(),
+            lat: place.geometry.location.lat()
+          }
+        },
+        photos: place.photos, // All photos
+        current_opening_hours: place.current_opening_hours, // Opening hours
+      }
     };
 
     // POST to /api/places
