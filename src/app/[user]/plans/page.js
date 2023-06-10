@@ -4,7 +4,10 @@ import GoogleMapReact from "google-map-react";
 import Marker from "./Marker";
 import LocationDot from "./LocationDot";
 import styles from './page.module.css';
+import { useSearchParams } from 'next/navigation'
 import { getUserLocation } from './mapUtils';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShareAlt } from '@fortawesome/free-solid-svg-icons';
 
 const PlanPage = ({ params }) => {
   const [plans, setPlans] = useState([]);
@@ -13,6 +16,21 @@ const PlanPage = ({ params }) => {
   const [userLocation, setUserLocation] = useState(null);
   const [isPublic, setIsPublic] = useState(false);
   const [selectedPlaceId, setSelectedPlaceId] = useState(null);
+
+  const searchParams = useSearchParams();
+  const planName = searchParams.get('plan_name') ? decodeURIComponent(searchParams.get('plan_name')) : null;
+
+  const handleShareClick = async () => {
+    const shareUrl = `${window.location.protocol}//${window.location.host}/${params.user}/plans?plan_name=${encodeURIComponent(selectedPlan.plan_name)}`;
+    if (navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        alert('Plan link copied to clipboard');
+      } catch (err) {
+        console.error('Failed to copy plan link: ', err);
+      }
+    }
+  };
 
   const handleSelect = (placeId) => {
     setSelectedPlaceId(placeId);
@@ -48,9 +66,18 @@ const PlanPage = ({ params }) => {
   }
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/plans?username=${params.user}`) 
+    fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/plans?username=${params.user}`)
       .then((response) => response.json())
-      .then((data) => setPlans(data));
+      .then((data) => {
+        setPlans(data);
+        // If a plan name was given in the query parameter, select it
+        if(planName) {
+          const planToSelect = data.find(plan => plan.plan_name === planName);
+          if(planToSelect) {
+            handlePlanClick(planToSelect);
+          }
+        }
+      });
   }, []);
 
   const handlePlanClick = (plan) => {
@@ -97,6 +124,12 @@ const PlanPage = ({ params }) => {
 
     {selectedPlan && (
         <div className={styles["map-container"]}>
+              <button 
+                className={styles.shareButton}
+                onClick={handleShareClick}
+              >
+                <FontAwesomeIcon icon={faShareAlt} />
+              </button>
             <GoogleMapReact
             bootstrapURLKeys={{ 
                 key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY, 
