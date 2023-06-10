@@ -114,6 +114,9 @@ const PlanPage = ({ params }) => {
                 text={place.place_name}
                 placeId={place.place_id}
                 type={place.place_type}
+                types={place.types}
+                photo_url={place.photo_url}
+                opening_hours={place.opening_hours}
                 selectedPlaceId={selectedPlaceId}
                 onSelect={handleSelect}
               />

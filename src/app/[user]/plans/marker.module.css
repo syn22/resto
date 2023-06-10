@@ -1,19 +1,18 @@
 .marker {
-    position: absolute;
+    position: relative;
     bottom: 50%;  /* Align marker to the bottom center */
     left: 50%;
     transform: translate(-50%, 50%);
     color: #000000;
     font-size: 12px;
     font-weight: bold;
-    z-index: 201;
 }
 
 .marker .info {
     display: none;
     background-color: #fff;
     border: 2px solid #000;
-    padding: 5px;
+    padding: 15px;
     border-radius: 5px;
     margin-top: 30px;  /* Add space above info box */
     position: absolute;
@@ -23,7 +22,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    text-align: left;
+    width: min-content; /* Adjust the width to fit the content */
+    max-width: 300px; /* Set a maximum width to ensure the box doesn't get too big */
+    z-index: 2;
 }
 
 .marker.selected .info {
@@ -32,39 +34,100 @@
 
 .info h2 {
     margin-bottom: 10px;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.info button {
-    margin: 5px 0;
-    padding: 5px 10px;
-    border: none;
-    background-color: #e99f16;
-    color: white;
+.info .tagContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.info .tag {
+    padding: 5px;
+    background-color: #eee;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.info button:hover {
-    background-color: #d63336;
+.hoursContainer {
+    display: flexbox;
+    gap: 5px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 10px;
 }
 
-.info button:disabled {
-    background-color: #ccc;
-    color: #888;
-    cursor: not-allowed;
+.hoursRow {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.day {
+    font-weight: bold;
+    text-align: right;
+    margin-right: 5px;
+}
+
+.hours {
+    text-align: left;
+    white-space: nowrap;
+}
+
+.directions {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
   }
-
-.pin:after {
-    content: '';
-    width: 14px;
-    height: 14px;
-    margin: 8% auto;
-    background-color: #fff;
-    position: absolute;
-    border-radius: 50%;
+  
+  .directionText {
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+.directions img {
+    height: 40px;
 }
 
+.directionButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 5px;
+  }
+  
+.directionButton:hover {
+    background-color: #e6e6e6;
+  }
+  
+  .iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 0%;
+    width: 40px;
+    height: 40px;
+    border: 2px solid black;
+  }
+  
+  .googleButton {
+    background-color: #4285F4; /* Google background color */
+  }
+  
+  .kakaoButton {
+    background-color: #FFCD00; /* Kakao background color */
+  }
+  
 @keyframes pulse {
     0% {
         transform: scale(0);

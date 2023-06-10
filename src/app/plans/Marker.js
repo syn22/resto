@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './marker.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapPin, faUtensils, faGraduationCap, faLandmark, faPlane, faBasketShopping, faTree, faMugSaucer } from '@fortawesome/free-solid-svg-icons';
+import { faMapPin, faUtensils, faGraduationCap, faLandmark, faPlane, faBasketShopping, faTree, faMugSaucer, faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
-const Marker = ({ text, placeId, removePlace, lat, lng, selectedPlaceId, onSelect, type }) => {
+const Marker = ({ text, placeId, removePlace, lat, lng, selectedPlaceId, onSelect, type, types, opening_hours }) => {
   const handleDirection = () => {
     const place = encodeURIComponent(text);
     window.open(`https://www.google.com/maps/dir/?api=1&destination=${place}`, "_blank");
@@ -62,9 +62,23 @@ const Marker = ({ text, placeId, removePlace, lat, lng, selectedPlaceId, onSelec
       </div>
       <div className={styles.info}>
         <h2>{text}</h2>
-        <button onClick={handleDirection}>Get Directions (Google)</button>
-        <button onClick={handleKakaoDirection}>Get Directions (Kakao)</button>
-        <button onClick={handleRemove} disabled>Remove Place</button>
+        <div className={styles.tagContainer}>
+          {types?.map((tag, index) => (
+            <span key={index} className={styles.tag}>{tag}</span>
+          ))}
+        </div>
+        {opening_hours && (
+          <div className={styles.openingHours}>
+            <h3>Opening Hours</h3>
+            {opening_hours.map((hour, index) => (
+              <p key={index}>{hour}</p>
+            ))}
+          </div>
+        )}
+        <div className={styles.directions}>
+          <button onClick={handleDirection}><FontAwesomeIcon icon={faChevronRight} /></button>
+          <button onClick={handleKakaoDirection}><FontAwesomeIcon icon={faChevronLeft} /></button>
+        </div>
       </div>
     </div>
   );
